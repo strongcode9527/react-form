@@ -10,11 +10,12 @@ var webpack = require('webpack'),
   reload = require('reload')
 
 app.use(webpackDevMiddleware(compile, {
-  publicPath: '../src/assets'
+  publicPath: '/'
 }))
 
 app.use(webpackHotMiddleware(compile))
-var server = http.createServer(app)
+
+var server = http.createServer(app) 
 reload(server, app)
 
 server.listen(3000, function() {
