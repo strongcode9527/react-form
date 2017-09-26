@@ -6,8 +6,8 @@ var webpack = require('webpack'),
   app = express(),
   opn = require('opn'),
   webpackHotMiddleware = require('webpack-hot-middleware'),
-  http = require('http'),
-  reload = require('reload')
+  http = require('http')
+  // reload = require('reload')
 
 app.use(webpackDevMiddleware(compile, {
   publicPath: '/'
@@ -16,8 +16,9 @@ app.use(webpackDevMiddleware(compile, {
 app.use(webpackHotMiddleware(compile))
 
 var server = http.createServer(app) 
-reload(server, app)
+// reload(server, app)
 
 server.listen(3000, function() {
   opn('http:\\localhost:3000')
 });
+

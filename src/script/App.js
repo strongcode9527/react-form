@@ -5,7 +5,7 @@ export default class App extends Component {
   render() {
     return (
       <div> 
-        热更新尝试。
+        我终于看到hmr了呀womendoukandaole
       </div>
     )
   }
