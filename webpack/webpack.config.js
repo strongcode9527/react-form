@@ -2,6 +2,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseConfig = require('./webpack.base.js')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 var config = merge(
   baseConfig, {
@@ -10,11 +11,12 @@ var config = merge(
         template: 'index.html'
       }),
       new webpack.HotModuleReplacementPlugin(),
-    ]
+      new OpenBrowserPlugin({ url: 'http://localhost:3001' }),
+    ],
+    devtool: 'inline-source-map',
   }
 )
 
-Object.keys(config.entry).forEach(item => config.entry[item] = ['webpack-hot-middleware/client'].concat(config.entry[item]))
 console.log(Object.keys(config.entry))
 console.log('config', config)
 

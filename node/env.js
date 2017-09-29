@@ -1,24 +1,18 @@
 var webpack = require('webpack'),
   webpackConfig = require('../webpack/webpack.config'),
   compile = webpack(webpackConfig),
-  webpackDevMiddleware = require('webpack-dev-middleware'),
-  express = require('express'),
-  app = express(),
   opn = require('opn'),
-  webpackHotMiddleware = require('webpack-hot-middleware'),
-  http = require('http')
-  // reload = require('reload')
+  webpackDevServer = require('webpack-dev-server')
+ 
+var options = {
+  hot: true,
+  hotOnly: true,
+  contentBase: './'
+}
 
-app.use(webpackDevMiddleware(compile, {
-  publicPath: '/'
-}))
+var server = new webpackDevServer(compile, options)
 
-app.use(webpackHotMiddleware(compile))
-
-var server = http.createServer(app) 
-// reload(server, app)
-
-server.listen(3000, function() {
-  opn('http:\\localhost:3000')
-});
-
+server.listen(3001, err => {
+  console.log('in server')
+  opn('localhost:3001')
+})
