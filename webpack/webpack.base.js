@@ -1,8 +1,11 @@
 var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    index: './src/script/index.js'
+    index: ['webpack-dev-server/client?http://localhost:3001/','./src/script/index.js']
   },
   output: {
     path: path.resolve(__dirname,'dist'),
@@ -12,7 +15,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader','eslint-loader']
+        use: ['babel-loader','eslint-loader'],
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,
@@ -23,5 +27,6 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  devtool: 'inline-source-map',
 }

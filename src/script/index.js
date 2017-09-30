@@ -5,7 +5,9 @@ import App from './App'
 
   
  render(
-    <App />,
+    <App>
+      haode sdfdsfdsfffsdfsdfsd
+    </App>,
     document.getElementById('root')
   )
 

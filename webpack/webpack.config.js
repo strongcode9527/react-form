@@ -10,14 +10,11 @@ var config = merge(
       new HtmlWebpackPlugin({
         template: 'index.html'
       }),
-      new webpack.HotModuleReplacementPlugin(),
       new OpenBrowserPlugin({ url: 'http://localhost:3001' }),
+      new webpack.HotModuleReplacementPlugin()
     ],
     devtool: 'inline-source-map',
   }
 )
-
-console.log(Object.keys(config.entry))
-console.log('config', config)
 
 module.exports = config

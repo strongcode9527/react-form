@@ -3,9 +3,10 @@ import React,{Component} from 'react'
 
 export default class App extends Component {
   render() {
+    const {children} = this.props
     return (
       <div> 
-        热更新1
+        热更新完成
       </div>
     )
   }
