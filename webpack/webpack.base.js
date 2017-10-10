@@ -1,11 +1,9 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var webpack = require('webpack')
+const path = require('path') 
+
 
 module.exports = {
   entry: {
-    index: ['webpack-dev-server/client?http://localhost:3001/','./src/script/index.js']
+    index: ['./examples/index.js']
   },
   output: {
     path: path.resolve(__dirname,'dist'),
