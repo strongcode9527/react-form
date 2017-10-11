@@ -9,13 +9,13 @@ const createData = () => {
     
   }
 
-  function init(formName, formKey, formValue) {
-    if(!formName && !formKey && !formValue){
+  function init(formName, value) {
+    if(!formName && !value){
       throw new Error("有错误")
     }
-    data.formKey = formValue
+    data.formName = value
   }
-
+  
   function modify(formName, formKey, formValue) {
     if(!formName && !formKey && !formValue){
       throw new Error("有错误")
@@ -23,8 +23,8 @@ const createData = () => {
     data.formKey = formValue
   }
 
-  function fetch() {
-    
+  function fetch(formName, formKey) {
+    return data.formName.formKey
   }
 
   return {
