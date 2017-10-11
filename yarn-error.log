@@ -1,14 +1,14 @@
 Arguments: 
-  D:\software\node\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add webpack -D
+  D:\node\node.exe D:\Bin\yarn.js install
 
 PATH: 
-  C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseSVN\bin;D:\software\nvm;D:\software\node;D:\software\node\global;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Microsoft VS Code\bin;D:\software\nvm;D:\software\node;C:\Users\strong\AppData\Roaming\npm;C:\Users\strong\AppData\Local\Yarn\bin
+  C:\Program Files (x86)\Common Files\NetSarang;C:\Program Files\Java\jdk1.8.0_45\bin;C:\Program Files\Java\jdk1.8.0_45\jre\bin;\;D:\tomcat\apache-tomcat-8.0.21-windows-x64\apache-tomcat-8.0.21\bin;D:\tomcat\apache-tomcat-8.0.21-windows-x64\apache-tomcat-8.0.21\lib;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Program Files\MySQL\MySQL Server 5.6\bin;D:\maven\apache-maven-3.3.9\bin;D:\mongodb\bin;C:\Users\strong\svn\bin;D:\Git\cmd;D:\Git\usr\bin;D:\nvm;E:\node;D:\bin;E:\node\global;global;D:\nvm;D:\node;C:\Users\strong\AppData\Local\Yarn\bin;D:\Microsoft VS Code\bin
 
 Yarn version: 
-  1.1.0
+  0.27.5
 
 Node version: 
-  8.5.0
+  8.2.1
 
 Platform: 
   win32 x64
@@ -39,8 +39,9 @@ npm manifest:
     },
     "homepage": "https://github.com/strongcode9527/react-form#readme",
     "dependencies": {
+      "immutable": "^4.0.0-rc.4",
       "prop-types": "^15.5.10",
-      "react": "^15.6.1",
+      "react": "^16.0.0",
       "react-dom": "^15.6.1"
     },
     "devDependencies": {
@@ -1532,6 +1533,9 @@ Lockfile:
       safe-buffer "^5.0.1"
       sha.js "^2.4.8"
   
+  <<<<<<< HEAD
+  cross-spawn@^5.0.1, cross-spawn@^5.1.0:
+  =======
   create-react-class@^15.6.0:
     version "15.6.0"
     resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
@@ -1541,6 +1545,7 @@ Lockfile:
       object-assign "^4.1.1"
   
   cross-spawn@5.1.0, cross-spawn@^5.0.1, cross-spawn@^5.1.0:
+  >>>>>>> 20e28c166eef11b9b70af9ec8410c533d7dc1ba7
     version "5.1.0"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
     dependencies:
@@ -2757,6 +2762,10 @@ Lockfile:
   ignore@^3.3.3:
     version "3.3.5"
     resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.5.tgz#c4e715455f6073a8d7e5dae72d2fc9d71663dba6"
+  
+  immutable@^4.0.0-rc.4:
+    version "4.0.0-rc.4"
+    resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.4.tgz#eff99bcea8bd68ce6c7725885e44011225f14fec"
   
   imurmurhash@^0.1.4:
     version "0.1.4"
@@ -4015,6 +4024,11 @@ Lockfile:
       object-assign "^4.1.0"
       prop-types "^15.5.10"
   
+  <<<<<<< HEAD
+  react@^16.0.0:
+    version "16.0.0"
+    resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+  =======
   react-error-overlay@^2.0.2:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-2.0.2.tgz#967b091962b17f5aeb4a60b1311b1736e1b6533d"
@@ -4040,12 +4054,12 @@ Lockfile:
   react@^15.6.1:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
+  >>>>>>> 20e28c166eef11b9b70af9ec8410c533d7dc1ba7
     dependencies:
-      create-react-class "^15.6.0"
-      fbjs "^0.8.9"
+      fbjs "^0.8.16"
       loose-envify "^1.1.0"
-      object-assign "^4.1.0"
-      prop-types "^15.5.10"
+      object-assign "^4.1.1"
+      prop-types "^15.6.0"
   
   read-pkg-up@^1.0.1:
     version "1.0.1"
@@ -5155,7 +5169,12 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: connect ETIMEDOUT 104.16.60.173:443
-      at Object._errnoException (util.js:1026:11)
-      at _exceptionWithHostPort (util.js:1049:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1174:14)
+  SyntaxError: Unknown token 1457:1 in E:\work\react-form\yarn.lock
+      at Parser.unexpected (D:\lib\yarn-cli.js:37452:11)
+      at Parser.parse (D:\lib\yarn-cli.js:37557:14)
+      at exports.default (D:\lib\yarn-cli.js:37238:17)
+      at D:\lib\yarn-cli.js:2090:60
+      at Generator.next (<anonymous>)
+      at step (D:\lib\yarn-cli.js:91:30)
+      at D:\lib\yarn-cli.js:102:13
+      at <anonymous>
