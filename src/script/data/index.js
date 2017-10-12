@@ -1,7 +1,7 @@
 /**
  * init the data of the form
  */
-import {fromJS} from 'immutable'
+// import {fromJS} from 'immutable'
 
 const createData = () => {
 
@@ -12,36 +12,55 @@ const createData = () => {
   const listeners = {}
 
   function init(formId, value) {
-    if(!formId && !value){
+    if(!formId || !value){
       throw new Error("有错误")
     }
+    
     data[formId] = value
+    listeners[formId] = {}
+    // listeners[formId] && listeners[formId](data[formId])
   }
   
-  function modify(formId, formKey, formValue) {
-    if(!formId && !formKey && !formValue){
+  function initFormItem(formId, itemKey) {
+    data[formId][itemKey] = undefined
+  }
+
+  function modify(formId, dataKey, value) {
+    if(!formId && !dataKey && !value){
       throw new Error("有错误")
     }
-    data[formKey] = formValue
+    data[formId][dataKey] = value
+    listeners[formId][dataKey](value)
   }
 
-  function fetch(formId, formKey) {
-    return data[formId][formKey]
+  function fetch(formId, dataKey) {
+    if( arguments.length === 0 ) {
+      throw new Error('fetch must have least one arguments')
+    }
+    if(!data[formId]) {
+      throw new Error('formId must exits')
+    }
+    if(formId && dataKey) {
+      return data[formId][dataKey] 
+    }else {
+      return data[formId]
+    }
   }
 
-  function subscribe(listener, formId) {
-    if(listeners[formId]) {
+  function subscribe(formId, dataKey, listener) {
+    if(listeners[formId][dataKey]) {
       console.warn('the listener already exists')
       return 0
     }
-    listeners[formId] = listener
+    subscribe[formId][dataKey] = listener
   }
   return {
     init,
     modify,
     fetch,
     subscribe,
+    initFormItem,
   }
 }
 
-export default createData
+export default createData()

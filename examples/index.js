@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import {CreateForm, Field} from '../src/script/index.js'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
+import createData from '../src/script/data'
 
 const renderInput = ({value}) => (
   <div>
@@ -11,6 +12,17 @@ const renderInput = ({value}) => (
 )
 
 class Index extends Component {
+  constructor(props) {
+    super(props)
+  }
+  componentDidMount() {
+    const data = createData.init()
+    data.init('strong', {name: 'strong', age: '18'})
+    data.subscribe('strong', (data) => {
+      console.log('subscribe', data)
+    })
+    data.modify('strong', 'name', 'strongModified')
+  }
   render() {
     return (
       <div>
@@ -20,6 +32,6 @@ class Index extends Component {
   }
 }
 
-console.log('index', Index)
+
 
 render(<Index />, document.getElementById('root')) 

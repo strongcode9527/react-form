@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/strongcode9527/react-form#readme",
   "dependencies": {
+    "hoist-non-react-statics": "^2.3.1",
     "immutable": "^4.0.0-rc.4",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",
-    "react-dom": "^15.6.1"
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
