@@ -52,7 +52,11 @@ const createData = () => {
       console.warn('the listener already exists')
       return 0
     }
-    subscribe[formId][dataKey] = listener
+    console.log(formId, dataKey, listener)
+    subscribe[formId] = {
+      ...subscribe[formId],
+      [dataKey]: listener,
+    }
   }
   return {
     init,

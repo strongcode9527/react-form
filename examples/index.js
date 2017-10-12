@@ -3,8 +3,10 @@ import {CreateForm, Field} from '../src/script/index.js'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
 import createData from '../src/script/data'
+// import 
+// createData.init(formName, initData || {})
 
-const renderInput = ({value}) => (
+const RenderInput = ({value}) => (
   <div>
     <input value={value}/>
     <p>第一个掉个单元</p>
@@ -16,17 +18,12 @@ class Index extends Component {
     super(props)
   }
   componentDidMount() {
-    const data = createData.init()
-    data.init('strong', {name: 'strong', age: '18'})
-    data.subscribe('strong', (data) => {
-      console.log('subscribe', data)
-    })
-    data.modify('strong', 'name', 'strongModified')
+
   }
   render() {
     return (
       <div>
-        <Field component={renderInput} />
+        <Field component={RenderInput} name="name"/>
       </div>
     )
   }
@@ -34,4 +31,9 @@ class Index extends Component {
 
 
 
-render(<Index />, document.getElementById('root')) 
+const A = CreateForm({formName: 'strong', initData: {}})(Index)
+
+
+// console.log(CreateForm({formName: 'strong', initData: {}})(Index))
+
+render(<A />, document.getElementById('root')) 

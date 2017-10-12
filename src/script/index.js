@@ -1,10 +1,10 @@
-import Field from './component/CreateForm'
+import Field from './component/Field'
 import CreateForm from './component/CreateForm'
 
 
 
 
-export  {
+export {
   Field,
   CreateForm,
 }

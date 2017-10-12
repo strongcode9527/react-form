@@ -3,22 +3,29 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 
-export default function CreateForm({formName, initData}) {
-  return (WrapComponent) => class extends Component {
+export default ({formName, initData}) => (WrapComponent) => class Hoc extends Component {
     static childContextTypes = {
       store: PropTypes.object,
       formName: PropTypes.string,
     }
+    constructor(props) {
+      super(props)
+      console.log('store', createData.init(formName, initData || {}))  
+    }
     getChildContext() {
+      createData.init(formName, initData || {})
+      console.log('create', formName, initData)
       return {
         formName: formName,
-        store: createData.init(formName, initData || {})
+        store: createData,
       }
     }
     render() {
+         
       return (
-        <WrapComponent />
+        <div>
+          <WrapComponent /> 
+        </div>
       )
     }
   }
-}
