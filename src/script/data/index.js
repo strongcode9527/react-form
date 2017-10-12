@@ -9,30 +9,39 @@ const createData = () => {
     
   }
 
-  function init(formName, value) {
-    if(!formName && !value){
+  const listeners = {}
+
+  function init(formId, value) {
+    if(!formId && !value){
       throw new Error("有错误")
     }
-    data.formName = value
+    data[formId] = value
   }
   
-  function modify(formName, formKey, formValue) {
-    if(!formName && !formKey && !formValue){
+  function modify(formId, formKey, formValue) {
+    if(!formId && !formKey && !formValue){
       throw new Error("有错误")
     }
-    data.formKey = formValue
+    data[formKey] = formValue
   }
 
-  function fetch(formName, formKey) {
-    return data.formName.formKey
+  function fetch(formId, formKey) {
+    return data[formId][formKey]
   }
 
+  function subscribe(listener, formId) {
+    if(listeners[formId]) {
+      console.warn('the listener already exists')
+      return 0
+    }
+    listeners[formId] = listener
+  }
   return {
     init,
     modify,
     fetch,
+    subscribe,
   }
-
 }
 
 export default createData
