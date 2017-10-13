@@ -8,9 +8,7 @@ export default ({formName, initData}) => (WrapComponent) => class Hoc extends Co
       store: PropTypes.object,
       formName: PropTypes.string,
     }
-    constructor(props) {
-      super(props)
-    }
+    static displayName = `Hoc`
     getChildContext() {
       createData.init(formName, initData || {})
       return {
@@ -21,9 +19,7 @@ export default ({formName, initData}) => (WrapComponent) => class Hoc extends Co
     render() {
          
       return (
-        <div>
           <WrapComponent /> 
-        </div>
       )
     }
   }

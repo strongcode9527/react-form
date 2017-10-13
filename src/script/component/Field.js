@@ -21,12 +21,6 @@ export default class Field extends Component {
     initValidations(formName, props.name, props.validations)
   }
 
-  
-  componentDidMount() {
-    // const {initField, name, warning} = this.props //将此项表单返还给form组件进行初始化。
-    // initField({name, warning})
-  }
-
   changeState() { 
     this.setState({
       ...(this.store.fetch(this.formName, this.props.name))
@@ -38,13 +32,7 @@ export default class Field extends Component {
     modify(this.formName, name, e.target.value)
   }
   render() {
-    const {
-      component: Component,
-    } = this.props
-    return (
-      <div>
-        <Component onChange={this.handleChange} value={this.state.value} error={this.state.error}/>
-      </div>
-    )
+    const {component: Component,} = this.props
+    return <Component onChange={this.handleChange} value={this.state.value} error={this.state.error}/> 
   }
 }

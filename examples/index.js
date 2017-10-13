@@ -13,12 +13,6 @@ const RenderInput = ({value, onChange, error}) => (
 )
 
 class Index extends Component {
-  constructor(props) {
-    super(props)
-  }
-  componentDidMount() {
-
-  }
   render() {
     return (
       <div>
