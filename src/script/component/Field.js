@@ -8,17 +8,17 @@ export default class Field extends Component {
   }
   constructor(props, {store,formName}) {
     super(props)
-    console.log(store, formName)
-    const {fetch, subscribe, initFormItem} = store
-    
+    const {fetch, subscribe, initFormItem, initValidations} = store
+    this.store = store
+    this.formName = formName
     this.state = {
-      value: fetch(formName, props.name) //form item value
+      ...(fetch(formName, props.name)) //form item value   
     }
-    
     this.changeState = this.changeState.bind(this)
-    
-    initFormItem(formName)
+    this.handleChange = this.handleChange.bind(this)
+    initFormItem(formName, props.name)
     subscribe(formName, props.name, this.changeState)
+    initValidations(formName, props.name, props.validations)
   }
 
   
@@ -27,19 +27,23 @@ export default class Field extends Component {
     // initField({name, warning})
   }
 
-  changeState(value) { 
+  changeState() { 
     this.setState({
-      value,
+      ...(this.store.fetch(this.formName, this.props.name))
     })
+  }
+  handleChange(e) {
+    const {modify} = this.store,
+      {name} = this.props
+    modify(this.formName, name, e.target.value)
   }
   render() {
     const {
       component: Component,
     } = this.props
-    console.log('como', Component)
     return (
       <div>
-        <Component />
+        <Component onChange={this.handleChange} value={this.state.value} error={this.state.error}/>
       </div>
     )
   }

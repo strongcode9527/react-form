@@ -1,15 +1,14 @@
-import PropTypes from 'prop-types'
+
 import {CreateForm, Field} from '../src/script/index.js'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
-import createData from '../src/script/data'
-// import 
-// createData.init(formName, initData || {})
 
-const RenderInput = ({value}) => (
+
+const RenderInput = ({value, onChange, error}) => (
   <div>
-    <input value={value}/>
+    <input value={value} onChange={onChange} error={error}/>
     <p>第一个掉个单元</p>
+    <p>{error}</p>
   </div>
 )
 
@@ -23,7 +22,10 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Field component={RenderInput} name="name"/>
+        <Field component={RenderInput} name="name" validations={[a => {
+          if(!a) return 'input框不能为空'
+          return undefined
+        }]} />
       </div>
     )
   }
@@ -34,6 +36,5 @@ class Index extends Component {
 const A = CreateForm({formName: 'strong', initData: {}})(Index)
 
 
-// console.log(CreateForm({formName: 'strong', initData: {}})(Index))
 
 render(<A />, document.getElementById('root')) 

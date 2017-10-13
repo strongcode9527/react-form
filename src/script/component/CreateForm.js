@@ -10,11 +10,9 @@ export default ({formName, initData}) => (WrapComponent) => class Hoc extends Co
     }
     constructor(props) {
       super(props)
-      console.log('store', createData.init(formName, initData || {}))  
     }
     getChildContext() {
       createData.init(formName, initData || {})
-      console.log('create', formName, initData)
       return {
         formName: formName,
         store: createData,

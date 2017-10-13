@@ -1,69 +1,88 @@
 /**
  * init the data of the form
  */
-// import {fromJS} from 'immutable'
+import {requireArguments, mustBeUnique, isArray} from '../utils'
 
 const createData = () => {
 
-  const data = {
-    
-  }
-
-  const listeners = {}
+  const data = {},
+    error = {},
+    listeners = {},
+    validations = {}
 
   function init(formId, value) {
-    if(!formId || !value){
-      throw new Error("有错误")
-    }
-    
+    requireArguments(formId, value)
+    mustBeUnique(data, formId)
+    mustBeUnique(error, formId)
+    mustBeUnique(listeners, formId)
+    mustBeUnique(validations, formId)
     data[formId] = value
+    error[formId] = {}
     listeners[formId] = {}
-    // listeners[formId] && listeners[formId](data[formId])
+    validations[formId] = {}
   }
-  
+
+  function initValidations(formId, itemKey, validation) {
+    requireArguments(formId, itemKey, validations)
+    mustBeUnique(validations, formId, itemKey)
+    if(!isArray(validation)) {
+      throw new Error('the validations must be arrays')
+    }
+    validations[formId][itemKey] = validation
+  }
+
   function initFormItem(formId, itemKey) {
+    requireArguments(formId, itemKey)
+    mustBeUnique(data, formId, itemKey)
     data[formId][itemKey] = undefined
+    error[formId][itemKey] = undefined
   }
 
-  function modify(formId, dataKey, value) {
-    if(!formId && !dataKey && !value){
-      throw new Error("有错误")
-    }
-    data[formId][dataKey] = value
-    listeners[formId][dataKey](value)
+  function modify(formId, itemKey, value) {
+    requireArguments(formId, itemKey)
+    data[formId][itemKey] = value
+    error[formId][itemKey] = handleValidation(value, validations[formId][itemKey])
+    listeners[formId][itemKey]()
   }
 
-  function fetch(formId, dataKey) {
-    if( arguments.length === 0 ) {
-      throw new Error('fetch must have least one arguments')
-    }
+  function fetch(formId, itemKey) {
+    requireArguments(formId)
     if(!data[formId]) {
       throw new Error('formId must exits')
     }
-    if(formId && dataKey) {
-      return data[formId][dataKey] 
+    if(formId && itemKey) {
+      return {
+        value: data[formId][itemKey],
+        error: error[formId][itemKey],
+      }
     }else {
-      return data[formId]
+      return {
+        data: data[formId],
+        error: error[formId],
+      }
     }
   }
 
-  function subscribe(formId, dataKey, listener) {
-    if(listeners[formId][dataKey]) {
-      console.warn('the listener already exists')
-      return 0
-    }
-    console.log(formId, dataKey, listener)
-    subscribe[formId] = {
-      ...subscribe[formId],
-      [dataKey]: listener,
-    }
+  function subscribe(formId, itemKey, listener) {
+    mustBeUnique(listener, formId, itemKey)
+    listeners[formId][itemKey] = listener
   }
+
+  function handleValidation(value ,validation) {
+    let result = ''
+    validation.forEach( item => {
+      !result && (result = item(value))
+    })
+    return result
+  }
+
   return {
     init,
-    modify,
     fetch,
+    modify,
     subscribe,
     initFormItem,
+    initValidations,
   }
 }
 

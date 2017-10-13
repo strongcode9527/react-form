@@ -29,7 +29,6 @@ choosePort(HOST, DEFAULT_PORT)
     compile = createCompiler(webpack, webpackConfig, 'react-form', url),
     server = new webpackDevServer(compile, options)
     server.listen(port, HOST, err => {
-      console.log(chalk.cyan('Starting the development server...\n'));
       openBrowser(url.localUrlForBrowser)
     })
    
