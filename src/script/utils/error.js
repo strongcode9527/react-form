@@ -21,7 +21,16 @@ const mustBeUnique = (object, ...keys) => {
   }
 }
 
+function mustBeType(value, type, key) {
+  if(arguments.length === 0) {
+    throw new Error('mustBeType function must have least one argument')
+  } else if(typeof value !== type) {
+    throw new Error(`the type of ${key} must be ${type}`)
+  }
+}
+
 export {
+  mustBeType,
   mustBeUnique,
   requireArguments,
 }

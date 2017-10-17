@@ -20,6 +20,14 @@ class Index extends Component {
           if(!a) return 'input框不能为空'
           return undefined
         }]} />
+        <Field
+          component={RenderInput} name="age"
+          validations={[a => {
+            if(!a) return 'input框不能为空'
+            return undefined
+          }]}
+          isSynchVerify={false}
+        />
       </div>
     )
   }
@@ -27,7 +35,7 @@ class Index extends Component {
 
 
 
-const A = CreateForm({formName: 'strong', initData: {}})(Index)
+const A = CreateForm({formName: 'strong', initData: {}, isSynchVerify: true})(Index)
 
 
 

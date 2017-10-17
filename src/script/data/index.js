@@ -1,15 +1,22 @@
 /**
  * init the data of the form
  */
-import {requireArguments, mustBeUnique, isArray} from '../utils'
+import {requireArguments, mustBeUnique, isArray, typeOf} from '../utils'
 
 const createData = () => {
 
-  const data = {},
+  let data = {},
     error = {},
     listeners = {},
-    validations = {}
+    validations = {},
+    touched = {},//用于记录表跟内容是否focus过
+    isSynchVerify = false //用于记录所有表哥选项是否同步验证，默认不需要。
 
+  /**
+   *
+   * @param formId
+   * @param value
+   */
   function init(formId, value) {
     requireArguments(formId, value)
     mustBeUnique(data, formId)
@@ -20,6 +27,7 @@ const createData = () => {
     error[formId] = {}
     listeners[formId] = {}
     validations[formId] = {}
+    touched[formId] = {}
   }
 
   function initValidations(formId, itemKey, validation) {
@@ -38,10 +46,18 @@ const createData = () => {
     error[formId][itemKey] = undefined
   }
 
-  function modify(formId, itemKey, value) {
+  /**
+   *
+   * @param formId 表格key
+   * @param itemKey 表哥选项key
+   * @param value 修改的值
+   * @param isSynchVerifySub 是否需要验证此次修改的值。
+   */
+  function modify(formId, itemKey, value, isSynchVerifySub) {
+    console.log('sdf', isSynchVerifySub)
     requireArguments(formId, itemKey)
-    data[formId][itemKey] = value
-    error[formId][itemKey] = handleValidation(value, validations[formId][itemKey])
+    data[formId][itemKey] = value;
+    isSynchVerifySub && (error[formId][itemKey] = handleValidation(value, validations[formId][itemKey]))
     listeners[formId][itemKey]()
   }
 
@@ -76,10 +92,18 @@ const createData = () => {
     return result
   }
 
+  function focus() {
+
+  }
+  function validate() {
+
+  }
   return {
     init,
     fetch,
+    focus,
     modify,
+    validate,
     subscribe,
     initFormItem,
     initValidations,
