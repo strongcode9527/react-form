@@ -13,7 +13,11 @@ const RenderInput = ({value, onChange, error}) => (
 )
 
 class Index extends Component {
+  handleSubmit = (data) => {
+    console.log('adf',data)
+  }
   render() {
+    const {handleSubmit} = this.props
     return (
       <div>
         <Field component={RenderInput} name="name" validations={[a => {
@@ -28,6 +32,7 @@ class Index extends Component {
           }]}
           isSynchVerify={false}
         />
+        <input type="button" onClick={handleSubmit(this.handleSubmit)}/>
       </div>
     )
   }

@@ -54,7 +54,6 @@ const createData = () => {
    * @param isSynchVerifySub 是否需要验证此次修改的值。
    */
   function modify(formId, itemKey, value, isSynchVerifySub) {
-    console.log('sdf', isSynchVerifySub)
     requireArguments(formId, itemKey)
     data[formId][itemKey] = value;
     isSynchVerifySub && (error[formId][itemKey] = handleValidation(value, validations[formId][itemKey]))
@@ -91,7 +90,6 @@ const createData = () => {
     })
     return result
   }
-
   function focus() {
 
   }
