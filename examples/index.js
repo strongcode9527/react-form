@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 
 
-const RenderInput = ({value, onChange, error}) => (
+const RenderInput = ({meta:{value, error, focused}, event}) => (
   <div>
-    <input value={value} onChange={onChange} error={error}/>
+    <input value={value} {...event} />
     <p>第一个掉个单元</p>
-    <p>{error}</p>
+    {focused && <p>{error}</p>}
   </div>
 )
 
@@ -40,7 +40,7 @@ class Index extends Component {
 
 
 
-const A = CreateForm({formName: 'strong', initData: {}, isSynchVerify: true})(Index)
+const A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
 
 
 

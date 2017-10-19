@@ -5,10 +5,10 @@ import {mustBeType, typeOf} from '../utils'
 
 export default ({formName, initData ,isSynchVerify}) => {
   mustBeType(formName, 'string', 'formName')
-  !typeOf(isSynchVerify, 'boolean') && mustBeType(isSynchVerify, 'boolean', 'isSynchVerify')
   return (WrapComponent) => class Hoc extends Component {
     static childContextTypes = {
       store: PropTypes.object,
+      initData: PropTypes.object,
       formName: PropTypes.string,
       isSynchVerify: PropTypes.bool,
     }
@@ -19,11 +19,13 @@ export default ({formName, initData ,isSynchVerify}) => {
         isSynchVerify,
         store: createData,
         formName: formName,
+        initData: initData || {}
       }
     }
     handleSubmit = (func) => () => {
       mustBeType(func, 'function', 'func')
       func(createData.fetch(formName).data)
+      createData.changeShowAllErrorsState(formName)
     }
     render() {
       return <WrapComponent handleSubmit={this.handleSubmit}/>

@@ -4,13 +4,13 @@
 import {requireArguments, mustBeUnique, isArray, typeOf} from '../utils'
 
 const createData = () => {
-
   let data = {},
     error = {},
     listeners = {},
     validations = {},
-    touched = {},//用于记录表跟内容是否focus过
-    isSynchVerify = false //用于记录所有表哥选项是否同步验证，默认不需要。
+    focused = {},//用于记录表跟内容是否focus过
+    focusing = {}, //用于记录此表单内容是否正在focus
+    isShowErrors = {} //用于记录是否全部显示某个表单的所有错误
 
   /**
    *
@@ -20,14 +20,13 @@ const createData = () => {
   function init(formId, value) {
     requireArguments(formId, value)
     mustBeUnique(data, formId)
-    mustBeUnique(error, formId)
-    mustBeUnique(listeners, formId)
-    mustBeUnique(validations, formId)
     data[formId] = value
     error[formId] = {}
     listeners[formId] = {}
     validations[formId] = {}
-    touched[formId] = {}
+    focused[formId] = {}
+    focusing[formId] = {}
+    isShowErrors[formId] = false
   }
 
   function initValidations(formId, itemKey, validation) {
@@ -39,11 +38,13 @@ const createData = () => {
     validations[formId][itemKey] = validation
   }
 
-  function initFormItem(formId, itemKey) {
-    requireArguments(formId, itemKey)
-    mustBeUnique(data, formId, itemKey)
-    data[formId][itemKey] = undefined
-    error[formId][itemKey] = undefined
+  function initFormItem(formId, itemKey, value) {
+    // requireArguments(formId, itemKey)
+    // mustBeUnique(data, formId, itemKey)
+    !data[formId][itemKey] && (data[formId][itemKey] = value)
+    error[formId][itemKey] =  handleValidation(formId, itemKey)
+    focused[formId][itemKey] = false;
+    focusing[formId][itemKey] = false;
   }
 
   /**
@@ -56,7 +57,7 @@ const createData = () => {
   function modify(formId, itemKey, value, isSynchVerifySub) {
     requireArguments(formId, itemKey)
     data[formId][itemKey] = value;
-    isSynchVerifySub && (error[formId][itemKey] = handleValidation(value, validations[formId][itemKey]))
+    isSynchVerifySub && handleValidation(formId, itemKey)
     listeners[formId][itemKey]()
   }
 
@@ -69,6 +70,9 @@ const createData = () => {
       return {
         value: data[formId][itemKey],
         error: error[formId][itemKey],
+        focused: focused[formId][itemKey],
+        isShowErrors: isShowErrors[formId],
+        focusing: focusing[formId][itemKey],
       }
     }else {
       return {
@@ -83,28 +87,44 @@ const createData = () => {
     listeners[formId][itemKey] = listener
   }
 
-  function handleValidation(value ,validation) {
+  function handleValidation(formId ,itemKey) {
     let result = ''
-    validation.forEach( item => {
-      !result && (result = item(value))
+    console.log(formId, itemKey,validations[formId][itemKey])
+    validations[formId][itemKey].forEach( item => {
+      !result && (result = item(data[formId][itemKey]))
     })
-    return result
+    error[formId][itemKey] = result
+    listeners[formId][itemKey]()
   }
-  function focus() {
 
+
+
+  function changeFocusState(formId, itemKey) {
+    requireArguments(formId, itemKey)
+    focused[formId][itemKey] = true
+    focusing[formId][itemKey] = !focusing[formId][itemKey]
+    listeners[formId][itemKey]()
   }
-  function validate() {
+  function changeShowAllErrorsState(formId, itemKey) {
+    const data = focused[formId]
+    for(let i in data) {
+      if( data.hasOwnProperty( i ) ) {
+        data[i] = true
+        listeners[formId][i]()
+      }
+    }
 
   }
   return {
     init,
     fetch,
-    focus,
     modify,
-    validate,
     subscribe,
     initFormItem,
     initValidations,
+    changeFocusState,
+    handleValidation,
+    changeShowAllErrorsState,
   }
 }
 
