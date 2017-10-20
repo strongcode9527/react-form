@@ -28,7 +28,14 @@ const createData = () => {
     focusing[formId] = {}
     isShowErrors[formId] = false
   }
-
+  function asyncInitData(formId, value) {
+    for(let i in value) {
+      if( value.hasOwnProperty( i ) ) {
+        typeOf(data[formId][i]) === 'undefined' && (data[formId][i] = value[i])
+        listeners[formId][i]()
+      }
+    }
+  }
   function initValidations(formId, itemKey, validation) {
     requireArguments(formId, itemKey, validations)
     mustBeUnique(validations, formId, itemKey)
@@ -113,7 +120,6 @@ const createData = () => {
         listeners[formId][i]()
       }
     }
-
   }
   return {
     init,
@@ -121,6 +127,7 @@ const createData = () => {
     modify,
     subscribe,
     initFormItem,
+    asyncInitData,
     initValidations,
     changeFocusState,
     handleValidation,

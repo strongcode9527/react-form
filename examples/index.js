@@ -39,9 +39,29 @@ class Index extends Component {
 }
 
 
-
 const A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
 
+class Container extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: 'strongNew',
+      age: 10
+    }
+  }
+  handleClick = () => {
+    this.setState({
+      age: this.state.age + 1
+    })
+  }
+  render() {
+    return (
+      <div>
+        <A initData={this.state} />
+        <button onClick={this.handleClick}>点击模拟异步加载新数据</button>
+      </div>
+    )
+  }
+}
 
-
-render(<A />, document.getElementById('root')) 
+render(<Container />, document.getElementById('root'))

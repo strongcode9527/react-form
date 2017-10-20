@@ -14,12 +14,20 @@ export default ({formName, initData ,isSynchVerify}) => {
     }
     static displayName = `Hoc`
     getChildContext() {
-      createData.init(formName, initData || {}, isSynchVerify)
       return {
         isSynchVerify,
         store: createData,
         formName: formName,
         initData: initData || {}
+      }
+    }
+    constructor(props) {
+      super(props)
+      createData.init(formName, initData || {}, isSynchVerify)
+    }
+    componentWillReceiveProps(nextProps) {
+      if(nextProps.initData) {
+        createData.asyncInitData(formName, nextProps.initData)
       }
     }
     handleSubmit = (func) => () => {
