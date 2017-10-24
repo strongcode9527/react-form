@@ -46,10 +46,7 @@ const createData = () => {
   }
 
   function initFormItem(formId, itemKey, value) {
-    // requireArguments(formId, itemKey)
-    // mustBeUnique(data, formId, itemKey)
     !data[formId][itemKey] && (data[formId][itemKey] = value)
-    // error[formId][itemKey] =  handleValidation(formId, itemKey)
     focused[formId][itemKey] = false;
     focusing[formId][itemKey] = false;
   }
@@ -96,7 +93,6 @@ const createData = () => {
 
   function handleValidation(formId ,itemKey) {
     let result = ''
-    console.log(formId, itemKey,validations[formId][itemKey])
     validations[formId][itemKey].forEach( item => {
       !result && (result = item(data[formId][itemKey]))
     })
