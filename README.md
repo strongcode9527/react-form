@@ -1,5 +1,9 @@
 # react-form is a package like redux-form.But it doesn't depend on it.It is just a pure react component.
 
+一个类似于redux-form的组件，不需要绑定多余reducer，组建内部带有数据存储的json对象。
+
+写这个项目主要是对研究react-redux和redux源码的一个总结。自己来写一套react的全家桶。而且这个项目也锻炼了高阶组件的使用。
+
 ### create a form
 
 ```
@@ -41,6 +45,14 @@ class Index extends Component {
 
 
 const A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
+
+```
+
+A = connect(....)(A) //support react-redux connect方法。
+
+
+```
+
 
 
 ```

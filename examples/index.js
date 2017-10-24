@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 
 
-const RenderInput = ({meta:{value, error, focused}, event}) => (
+const RenderInput = ({meta:{value, error, focused, focusing}, event}) => (
   <div>
     <input value={value} {...event} />
     <p>第一个掉个单元</p>
-    {focused && <p>{error}</p>}
+    {focused && focusing && <p>{error}</p>}
   </div>
 )
 
@@ -30,38 +30,17 @@ class Index extends Component {
             if(!a) return 'input框不能为空'
             return undefined
           }]}
-          isSynchVerify={false}
+          isSynchVerify={true}
         />
-        <input type="button" onClick={handleSubmit(this.handleSubmit)}/>
+        <input type="button" onClick={handleSubmit(this.handleSubmit)} value="提交数据"/>
       </div>
     )
   }
 }
 
 
-const A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
+let A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
 
-class Container extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: 'strongNew',
-      age: 10
-    }
-  }
-  handleClick = () => {
-    this.setState({
-      age: this.state.age + 1
-    })
-  }
-  render() {
-    return (
-      <div>
-        <A initData={this.state} />
-        <button onClick={this.handleClick}>点击模拟异步加载新数据</button>
-      </div>
-    )
-  }
-}
 
-render(<Container />, document.getElementById('root'))
+
+render(<A />, document.getElementById('root'))

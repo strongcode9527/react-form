@@ -12,7 +12,7 @@ export default ({formName, initData ,isSynchVerify}) => {
       formName: PropTypes.string,
       isSynchVerify: PropTypes.bool,
     }
-    static displayName = `Hoc`
+    static displayName = `CreateForm(${WrapComponent || 'component'})`
     getChildContext() {
       return {
         isSynchVerify,

@@ -49,7 +49,7 @@ const createData = () => {
     // requireArguments(formId, itemKey)
     // mustBeUnique(data, formId, itemKey)
     !data[formId][itemKey] && (data[formId][itemKey] = value)
-    error[formId][itemKey] =  handleValidation(formId, itemKey)
+    // error[formId][itemKey] =  handleValidation(formId, itemKey)
     focused[formId][itemKey] = false;
     focusing[formId][itemKey] = false;
   }
