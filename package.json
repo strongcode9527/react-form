@@ -1,11 +1,13 @@
 {
-  "name": "react-form",
+  "name": "react-form-strong",
   "version": "1.0.0",
   "description": "a react package suport redux",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node node/env.js"
+    "start": "node node/env.js",
+    "build": "npm run clean  && babel ./src/script --out-dir ./lib --copy-files",
+    "clean": "rimraf ./lib ./dist"
   },
   "repository": {
     "type": "git",
@@ -17,12 +19,13 @@
     "form"
   ],
   "author": "strong",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/strongcode9527/react-form/issues"
   },
   "homepage": "https://github.com/strongcode9527/react-form#readme",
   "dependencies": {
+    "cross-env": "^5.1.0",
     "hoist-non-react-statics": "^2.3.1",
     "immutable": "^4.0.0-rc.4",
     "prop-types": "^15.5.10",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
@@ -52,6 +56,7 @@
     "opn": "^5.1.0",
     "react-dev-utils": "^4.1.0",
     "reload": "^2.2.2",
+    "rimraf": "^2.6.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
