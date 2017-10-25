@@ -2,7 +2,7 @@
   "name": "react-form-strong",
   "version": "1.0.0",
   "description": "a react package suport redux",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node/env.js",
