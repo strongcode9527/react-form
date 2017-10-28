@@ -4,6 +4,18 @@
 
 写这个项目主要是对研究react-redux和redux源码的一个总结。自己来写一套react的全家桶。而且这个项目也锻炼了高阶组件的使用。
 
+```
+
+git clone https://github.com/strongcode9527/react-form.git
+
+yarn install or npm install
+
+npm start
+
+
+```
+
+
 ### create a form
 
 ```
