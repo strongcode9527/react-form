@@ -32,8 +32,9 @@ export default ({formName, initData ,isSynchVerify}) => {
     }
     handleSubmit = (func) => () => {
       mustBeType(func, 'function', 'func')
-      func(createData.fetch(formName).data)
       createData.changeShowAllErrorsState(formName)
+      const {data, isOk} = createData.fetch(formName)
+      isOk && func(data)
     }
     render() {
       return <WrapComponent handleSubmit={this.handleSubmit}/>

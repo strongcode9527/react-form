@@ -10,8 +10,7 @@ const createData = () => {
     validations = {},
     focused = {},//用于记录表跟内容是否focus过
     focusing = {}, //用于记录此表单内容是否正在focus
-    isShowErrors = {} //用于记录是否全部显示某个表单的所有错误
-
+    isOk = {} //用于记录表单是否有错误,只在提交表单时使用。
   /**
    *
    * @param formId
@@ -26,7 +25,7 @@ const createData = () => {
     validations[formId] = {}
     focused[formId] = {}
     focusing[formId] = {}
-    isShowErrors[formId] = false
+    isOk[formId] = true  
   }
   function asyncInitData(formId, value) {
     for(let i in value) {
@@ -75,12 +74,12 @@ const createData = () => {
         value: data[formId][itemKey],
         error: error[formId][itemKey],
         focused: focused[formId][itemKey],
-        isShowErrors: isShowErrors[formId],
         focusing: focusing[formId][itemKey],
       }
     }else {
       return {
         data: data[formId],
+        isOk: isOk[formId],
         error: error[formId],
       }
     }
@@ -94,13 +93,16 @@ const createData = () => {
   function handleValidation(formId ,itemKey) {
     let result = ''
     validations[formId][itemKey].forEach( item => {
-      !result && (result = item(data[formId][itemKey]))
+      const error = item(data[formId][itemKey])
+      console.log(formId, itemKey, 'error',error)
+      if(!result && error) {
+        result = error
+        isOk[formId] = false
+      }
     })
     error[formId][itemKey] = result
     listeners[formId][itemKey]()
   }
-
-
 
   function changeFocusState(formId, itemKey) {
     requireArguments(formId, itemKey)
@@ -108,11 +110,13 @@ const createData = () => {
     focusing[formId][itemKey] = !focusing[formId][itemKey]
     listeners[formId][itemKey]()
   }
-  function changeShowAllErrorsState(formId, itemKey) {
+  //当表单提交时，再次校验所有表单数据，并改变所有表单状态。
+  function changeShowAllErrorsState(formId) {
     const data = focused[formId]
     for(let i in data) {
       if( data.hasOwnProperty( i ) ) {
         data[i] = true
+        handleValidation(formId ,i)
         listeners[formId][i]()
       }
     }

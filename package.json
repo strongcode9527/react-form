@@ -1,6 +1,6 @@
 {
   "name": "react-form-strong",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a react package suport redux",
   "main": "lib/index.js",
   "scripts": {
@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/strongcode9527/react-form#readme",
   "dependencies": {
-    "cross-env": "^5.1.0",
     "hoist-non-react-statics": "^2.3.1",
     "immutable": "^4.0.0-rc.4",
     "prop-types": "^15.5.10",
@@ -44,6 +43,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "chalk": "^2.1.0",
+    "cross-env": "^5.1.1",
+    "css-loader": "^0.28.7",
     "eslint": "3.19.0",
     "eslint-config-react-app": "^1.0.2",
     "eslint-loader": "1.7.1",
@@ -54,10 +55,13 @@
     "expresse": "^1.0.2",
     "html-webpack-plugin": "^2.30.1",
     "http": "^0.0.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "opn": "^5.1.0",
     "react-dev-utils": "^4.1.0",
     "reload": "^2.2.2",
     "rimraf": "^2.6.2",
+    "style-loader": "^0.19.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"

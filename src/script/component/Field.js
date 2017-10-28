@@ -67,6 +67,6 @@ export default class Field extends Component {
       }
 
     const {component: Component} = this.props
-    return <Component event={event} meta={this.state} />
+    return <Component event={event} meta={this.state} {...this.props}/>
   }
 }

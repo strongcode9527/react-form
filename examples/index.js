@@ -2,37 +2,38 @@
 import {CreateForm, Field} from '../src/script/index.js'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
+import './index.less'
 
-
-const RenderInput = ({meta:{value, error, focused, focusing}, event}) => (
-  <div>
-    <input value={value} {...event} />
-    <p>第一个掉个单元</p>
-    {focused && focusing && <p>{error}</p>}
+const RenderInput = ({meta:{value, error, focused, focusing}, event, name}) => (
+  <div className="form-item">
+    <p className="input-label">{name}</p>
+    <input className="input" value={value} {...event} />
+    {focused && <p className="error">{error}</p>}
   </div>
 )
 
 class Index extends Component {
   handleSubmit = (data) => {
-    console.log('adf',data)
+    alert('通过调试台，查看提交数据')
+    console.log(data)
   }
   render() {
     const {handleSubmit} = this.props
     return (
       <div>
         <Field component={RenderInput} name="name" validations={[a => {
-          if(!a) return 'input框不能为空'
+          if(!a) return 'The form cannot be empty'
           return undefined
         }]} />
         <Field
           component={RenderInput} name="age"
           validations={[a => {
-            if(!a) return 'input框不能为空'
-            return undefined
-          }]}
-          isSynchVerify={true}
+            if(!a) return 'The form cannot be empty'
+            return undefined 
+          }, a=> /^\d*$/.test(a) ? undefined : 'Only fill in the numbers'
+          ]}
         />
-        <input type="button" onClick={handleSubmit(this.handleSubmit)} value="提交数据"/>
+        <input className="button" type="button" onClick={handleSubmit(this.handleSubmit)} value="提交数据" isSynchVerify={true}/>
       </div>
     )
   }

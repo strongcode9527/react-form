@@ -1,0 +1,24 @@
+.form-item {
+  margin: 40px 100px;
+}
+.form-item .input-label {
+  margin: 0 10px;
+  width: 200px;
+  text-align: right;
+  float: left;
+}
+.form-item .input {
+  float: left;
+}
+.form-item .error {
+  float: left;
+  margin: 0 10px;
+}
+.button {
+  margin: 20px 300px;
+}
+.form-item:after {
+  clear: both;
+  content: " ";
+  display: block;
+}
