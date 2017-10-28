@@ -12,6 +12,7 @@ const RenderInput = ({meta:{value, error, focused, focusing}, event, name}) => (
   </div>
 )
 
+@CreateForm({formName: 'strong', initData: {name : 'strong'}, })
 class Index extends Component {
   handleSubmit = (data) => {
     alert('通过调试台，查看提交数据')
@@ -40,8 +41,8 @@ class Index extends Component {
 }
 
 
-let A = CreateForm({formName: 'strong', initData: {name : 'strong'}, })(Index)
 
 
 
-render(<A />, document.getElementById('root'))
+
+render(<Index />, document.getElementById('root'))
